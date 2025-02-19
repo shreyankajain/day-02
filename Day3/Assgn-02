@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char dna[100], pattern[20];
+    int count = 0;
+    char *ptr;
+    printf("Enter DNA Sequence: ");
+    scanf("%s", dna);
+    printf("Enter pattern to search: ");
+    scanf("%s", pattern);
+    ptr = strstr(dna, pattern); 
+    while (ptr != NULL) {
+        count++;
+        ptr = strstr(ptr + 1, pattern);  
+    }
+    printf("Pattern found %d time(s) in the DNA sequence.\n", count);
+    return 0;
+}
