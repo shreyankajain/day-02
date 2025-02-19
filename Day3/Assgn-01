@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100  
+
+void swap(char a[], char b[]) {
+    char temp[50];
+    strcpy(temp, a);
+    strcpy(a, b);
+    strcpy(b, temp);
+}
+
+void sortPassengers(char names[][50], int ages[], char destinations[][50], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (strcmp(destinations[j], destinations[j + 1]) > 0) {
+                swap(destinations[j], destinations[j + 1]);
+                swap(names[j], names[j + 1]);
+                int temp = ages[j];
+                ages[j] = ages[j + 1];
+                ages[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void searchPassengers(char names[][50], char destinations[][50], int n, char searchDest[]) {
+    int found = 0;
+    printf("Passengers traveling to %s:\n", searchDest);
+    for (int i = 0; i < n; i++) {
+        if (strcmp(destinations[i], searchDest) == 0) {
+            printf("%s\n", names[i]);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("No passengers found for this destination.\n");
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter number of passengers: ");
+    scanf("%d", &n);
+
+    char names[MAX][50], destinations[MAX][50];
+    int ages[MAX];
+
+    for (int i = 0; i < n; i++) {
+        printf("Passenger %d (Name, Age, Destination): ", i + 1);
+        scanf(" %[^,], %d, %[^,\n]", names[i], &ages[i], destinations[i]);
+    }
+
+    sortPassengers(names, ages, destinations, n);
+
+    printf("\nSorted List (by destination):\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s • %s\n", names[i], destinations[i]);
+    }
+
+    char searchDest[50];
+    printf("\nEnter destination to search: ");
+    scanf(" %s", searchDest);
+    searchPassengers(names, destinations, n, searchDest);
+
+    return 0;
+}
