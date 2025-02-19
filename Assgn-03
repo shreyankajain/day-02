@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+void atmTransaction(int choice, int amount, int *balance)
+ {
+    switch (choice)
+ {
+        case 1:
+            if (amount <= *balance) {
+                *balance -= amount;
+                printf("Transaction Successful. Remaining Balance: ₹%d\n", *balance);
+            } else {
+                printf("Insufficient Balance.\n");
+            }
+            break;
+        case 2: 
+            *balance += amount;
+            printf("Transaction Successful. New Balance: ₹%d\n", *balance);
+            break;
+        case 3: 
+            printf("Current Balance: ₹%d\n", *balance);
+            break;
+        default:
+            printf("Invalid Choice.\n");
+            break;
+    }
+}
+
+int main() {
+    int balance = 10000;
+    int choice, amount;
+
+    printf("Enter your choice:\n1. Withdraw\n2. Deposit\n3. Check Balance\nChoice: ");
+    scanf("%d", &choice);
+
+    if (choice == 1 || choice == 2) {
+        printf("Enter Amount: ");
+        scanf("%d", &amount);
+    }
+
+    atmTransaction(choice, amount, &balance);
+
+    return 0;
+}
