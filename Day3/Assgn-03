@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    printf("Enter the number of matches: ");
+    scanf("%d", &n);
+    int scores[n]; 
+    int highest, lowest;
+    float sum = 0.0;
+    printf("Enter scores of %d matches: ", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &scores[i]);
+        sum += scores[i];
+    }
+    highest = lowest = scores[0];
+    for (i = 1; i < n; i++) {
+        if (scores[i] > highest)
+            highest = scores[i];
+        if (scores[i] < lowest)
+            lowest = scores[i];
+    }
+    float average = sum / n;
+    printf("Highest Score: %d\n", highest);
+    printf("Lowest Score: %d\n", lowest);
+    printf("Average Score: %.2f\n", average);
+    return 0;
+}
